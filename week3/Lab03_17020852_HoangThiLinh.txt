@@ -1,0 +1,12 @@
+1.
+SELECT * FROM employees WHERE reportsTo is NULL;
+2.
+SELECT customerNumber FROM customers WHERE state is NOT NULL;
+3.
+SELECT * FROM orders WHERE requiredDate = '2003-01-18';
+4.
+SELECT * FROM orders
+WHERE (YEAR(orders.orderDate) = 2005 and MONTH(orderDate) = 05)
+and status = 'In Process';
+5.
+SELECT * FROM products WHERE productLine = 'Classic Cars';
