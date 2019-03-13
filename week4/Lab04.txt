@@ -1,0 +1,9 @@
+1.
+SELECT * FROM customers WHERE city IN('Nantes', 'Lyon');
+2.
+SELECT * FROM orders WHERE shippedDate BETWEEN '2003-01-10' AND '2003-03-10';
+3.
+SELECT * FROM productlines WHERE productLine LIKE '%CARS%';
+4.
+SELECT * FROM products ORDER BY quantityInStock DESC LIMIT 10;
+5.
