@@ -7,3 +7,5 @@ SELECT * FROM productlines WHERE productLine LIKE '%CARS%';
 4.
 SELECT * FROM products ORDER BY quantityInStock DESC LIMIT 10;
 5.
+SELECT DISTINCT productName FROM products; 
+ALTER TABLE products add inventoryMoney DECIMAL(10,2);
