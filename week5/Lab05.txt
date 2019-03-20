@@ -1,0 +1,28 @@
+1.
+SELECT substring(productDescription FROM 1 FOR 50) AS TitleOfProducts
+FROM products;
+2.
+SELECT CONCAT(firstName, ' ', lastName, ', ', jobTitle)
+AS 'fullNam, jobTitle'
+FROM employees;
+3.
+ALTER TABLE products 
+DROP FOREIGN KEY products_ibfk_1;
+
+ALTER TABLE products 
+ADD CONSTRAINT products_ibfk_1
+  FOREIGN KEY (productLine)
+  REFERENCES productlines (productLine)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE;
+
+UPDATE productlines SET productLine = replace(productLine, 'Cars', 'Automobiles');
+4.
+SELECT * , DATEDIFF(requiredDate, shippedDate) AS dayLeft
+FROM orders
+ORDER BY dayLeft DESC LIMIT 5;
+5.
+SELECT * FROM orders
+WHERE (EXTRACT(YEAR FROM orderDate) = 2005 
+and EXTRACT(MONTH FROM orderDate) = 5)
+and shippedDate is NULL;
