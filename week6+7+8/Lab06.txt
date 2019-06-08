@@ -1,0 +1,22 @@
+USE classicmodels;
+
+1. 
+SELECT city, count(*) FROM Customers GROUP BY city;
+
+2.
+SELECT count(*) FROM orders WHERE EXTRACT(MONTH FROM orderDate) = 3 AND EXTRACT(YEAR FROM orderDate) = 2005;
+
+3.
+SELECT *, SUM(orderdetails.quantityOrdered * orderdetails.priceEach) AS total
+FROM orderdetails, orders
+WHERE (YEAR(orders.orderDate) = 2005 and MONTH(orders.orderDate) = 03)
+AND orderdetails.orderNumber = orders.orderNumber
+GROUP BY orderdetails.orderNumber
+ORDER BY total DESC
+LIMIT 10;
+
+4.
+SELECT productLine, SUM(quantityInStock)
+FROM products
+GROUP BY productLine;
+

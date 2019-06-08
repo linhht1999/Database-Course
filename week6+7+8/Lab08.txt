@@ -1,0 +1,33 @@
+source E:\mysqlsampledatabase.sql
+use classicmodels;
+
+1.
+SELECT * FROM products
+WHERE productCode in 
+(SELECT productCode From orderdetails WHERE orderNumber in
+(SELECT orderNumber FROM orders WHERE (YEAR(orders.orderDate) = 2005 and MONTH(orders.orderDate) = 03)));
+
+2.
+SELECT DISTINCT p.*
+FROM products p
+INNER JOIN orderdetails od ON p.productCode = od.productCode
+INNER JOIN orders o ON o.orderNumber = od.orderNumber
+WHERE (YEAR(o.orderDate) = 2005 and MONTH(o.orderDate) = 03);
+
+3.
+SELECT * FROM orders
+WHERE YEAR(orderDate) = (SELECT YEAR(MAX(orderDate)) from orders)
+and MONTH(orderDate) = (SELECT MONTH(MAX(orderDate)) from orders);
+
+4.
+SELECT o.* , totalQuantityOrdered
+FROM orders o,
+(SELECT od.*, sum(quantityOrdered*priceEach) as totalQuantityOrdered
+FROM orderdetails od GROUP by od.orderNumber) as total
+WHERE o.orderNumber = total.orderNumber;
+
+5.
+SELECT o.* , sum(quantityOrdered*priceEach) as totalQuantityOrdered
+FROM orders o
+INNER JOIN orderdetails od ON o.orderNumber = od.orderNumber
+GROUP BY o.orderNumber;
